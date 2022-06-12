@@ -1,0 +1,17 @@
+
+#carouselExampleIndicators img{
+    max-height: 500px;
+    object-fit: cover;
+    object-position: 0px 0px;
+}
+
+
+#accesosRapidos > div{
+    margin-top: 5%;
+}
+
+#accesosRapidos a{
+    height: 50px;
+    line-height: 30px;
+    font-weight: bold;
+}

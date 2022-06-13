@@ -13,6 +13,7 @@ import { BuscarequipoComponent } from './buscarequipo/buscarequipo.component';
 import { BuscarjugadorComponent } from './buscarjugador/buscarjugador.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     BuscarequipoComponent,
     BuscarjugadorComponent,
     PerfilComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

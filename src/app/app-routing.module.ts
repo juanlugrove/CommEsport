@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BuscarequipoComponent } from './buscarequipo/buscarequipo.component';
 import { BuscarjugadorComponent } from './buscarjugador/buscarjugador.component';
+import { GuiaComponent } from './guia/guia.component';
 import { HomeComponent } from './home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'unete', component: RegistrologinComponent},
   {path: 'buscarEquipo', component: BuscarequipoComponent},
   {path: 'buscarJugador', component: BuscarjugadorComponent},
+  {path: 'guia', component: GuiaComponent},
   {path: '**', component: PagenotfoundComponent}
 
 ];

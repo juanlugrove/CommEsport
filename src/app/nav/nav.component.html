@@ -1,8 +1,30 @@
-<div class="bg-black row w-100 mx-auto text-center align-items-center">
-    <app-enlaces class="col"></app-enlaces>
-    <h1 class="col">LOGO</h1>
-    <div class="col d-flex">
-        <app-alert class="col"></app-alert>
-        <app-user-data class="col"></app-user-data>    
+<nav class="navbar navbar-dark navbar-expand-lg bg-black" style="margin-top: -3px;">
+  <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="p-4 d-lg-none" style="height: 50px;">
+    <img class="" src="../../assets/media/logo.png" alt="" style="margin-top: -30px; height: 30px;">
+  </div>
+  <div class="collapse navbar-collapse justify-content-between">
+      <ul class="navbar-nav mb-2 mb-lg-0 ps-3">
+        <li class="nav-item">
+          <a routerLink="/home" routerLinkActive="active-link" class="nav-link">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/buscarEquipo" routerLinkActive="active-link" class="nav-link">Buscar equipo</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/buscarJugador" routerLinkActive="active-link" class="nav-link">Buscar jugador</a>
+        </li>
+      </ul>
+      <div class="navbar-brand d-none d-lg-block" style="height: 50px; padding-top: 7px; margin-left: -170px;">
+        <img class="" src="../../assets/media/logo.png" alt="" style="height: 30px;">
+      </div>
+    <div class="d-none d-lg-block pe-3" *ngIf="!IsAuthenticated">
+      <!-- <app-alert class="col"></app-alert> -->
+      <app-user-data class="col"></app-user-data>
+      <!-- <a routerLink="/unete" class="btn btn-success text-center fw-bold text-white">Únete</a> -->
     </div>
-</div>
+  </div>
+</nav>

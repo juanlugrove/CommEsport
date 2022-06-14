@@ -1,1 +1,37 @@
-<p>registrologin works!</p>
+<div class="row my-5 py-5 w-100">
+    <div class="col mt-5 p-5">
+        <div class="col-9 mx-auto rounded-5 shadow bg-body py-3">
+            <h1 class="text-center">Registrate</h1>
+            <div class="col-8 mx-auto mt-5 pb-3">
+                <form [formGroup]="formRegister">
+                    <input type="text" name="username" placeholder="Usuario" class="form-control">
+                    <input type="mail" name="mail" placeholder="Correo" class="form-control mt-4">
+                    <input type="password" name="password" placeholder="Contraseña" class="form-control mt-4">
+                    <select class="form-select mt-4" name="platform">
+                        <option selected>Seleccione una plataforma</option>
+                        <option value="1">PS4</option>
+                        <option value="2">XBOX</option>
+                        <option value="3">ORIGIN</option>
+                      </select>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-success mt-4" [disabled]="!formRegister.valid">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col mt-5 border-start border-success p-4 d-flex align-items-center">
+        <div class="col-9 mx-auto rounded-5 shadow bg-body py-3">
+            <h1 class="text-center">Inicia sesión</h1>
+            <div class="col-8 mx-auto mt-5 pb-3">
+                <form [formGroup]="formLogin" >
+                    <input type="text" name="username" placeholder="Usuario" class="form-control" formControlName="username">
+                    <input type="password" name="password" placeholder="Contraseña" class="form-control mt-4" formControlName="password">
+                    <div class="d-flex justify-content-end">
+                        <button [disabled]="!formLogin.valid" type="submit" class="btn btn-success mt-4">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

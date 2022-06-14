@@ -1,1 +1,15 @@
-<p>buscarequipo works!</p>
+<div class="col-9 mx-auto rounded-5 shadow bg-body py-3 m-5">
+    <h1 class="text-center">Haz que te busquen</h1>
+    <div class="col-8 mx-auto mt-5 pb-3">
+        <form [formGroup]="formPostulacion">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Describe al jugador que buscas" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Describe el equipo que buscas</label>
+            </div>
+            <input type="text" name="video" placeholder="Link video Highlights" class="form-control mt-4">
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success mt-4" [disabled]="!formPostulacion.valid">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>

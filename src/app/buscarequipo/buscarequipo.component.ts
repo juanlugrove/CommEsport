@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-buscarequipo',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./buscarequipo.component.css']
 })
 export class BuscarequipoComponent implements OnInit {
-
-  constructor() { }
+  formPostulacion: FormGroup
+  constructor(private formBuilder: FormBuilder) {
+    this.formPostulacion=formBuilder.group({
+      description: ['', Validators.required],
+      video: ['', Validators.required]
+    });
+   }
 
   ngOnInit(): void {
   }

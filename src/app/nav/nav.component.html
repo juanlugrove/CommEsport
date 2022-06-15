@@ -21,10 +21,10 @@
       <div class="navbar-brand d-none d-lg-block" style="height: 50px; padding-top: 7px; margin-left: -170px;">
         <img class="" src="../../assets/media/logo.png" alt="" style="height: 30px;">
       </div>
-    <div class="d-none d-lg-block pe-3" *ngIf="!IsAuthenticated">
+    <div class="d-none d-lg-block pe-3">
       <!-- <app-alert class="col"></app-alert> -->
-      <!-- <app-user-data class="col"></app-user-data> -->
-      <a routerLink="/unete" class="btn btn-success text-center fw-bold text-white">Únete</a>
+      <app-user-data class="col" *ngIf="IsAuthenticated"></app-user-data>
+      <a routerLink="/unete" class="btn btn-success text-center fw-bold text-white" *ngIf="!IsAuthenticated">Únete</a>
     </div>
   </div>
 </nav>

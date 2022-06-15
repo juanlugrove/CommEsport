@@ -24,7 +24,7 @@
         <div class="col-9 mx-auto rounded-5 shadow bg-body py-3">
             <h1 class="text-center">Inicia sesión</h1>
             <div class="col-8 mx-auto mt-5 pb-3">
-                <form [formGroup]="formLogin" >
+                <form [formGroup]="formLogin" (ngSubmit)="Login()" >
                     <input type="text" name="username" placeholder="Usuario" class="form-control" formControlName="username">
                     <input type="password" name="password" placeholder="Contraseña" class="form-control mt-4" formControlName="password">
                     <div class="d-flex justify-content-end">

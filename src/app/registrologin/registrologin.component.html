@@ -28,7 +28,12 @@
                     <input type="text" name="username" placeholder="Usuario" class="form-control" formControlName="username">
                     <input type="password" name="password" placeholder="Contraseña" class="form-control mt-4" formControlName="password">
                     <div class="d-flex justify-content-end">
-                        <button [disabled]="!formLogin.valid" type="submit" class="btn btn-success mt-4">Enviar</button>
+                        <button [disabled]="!formLogin.valid || loading"  type="submit" class="btn btn-success mt-4">
+                            <span *ngIf="!loading">Únete</span>
+                            <div class="spinner-border text-light" role="status" *ngIf="loading">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                        </button>
                     </div>
                 </form>
             </div>

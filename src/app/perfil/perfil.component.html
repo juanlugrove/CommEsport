@@ -1,4 +1,4 @@
-<div class="col-11 col-md-9 mx-auto rounded-5 shadow bg-body py-3 m-5">
+<div class="col-11 col-md-9 mx-auto rounded-5 shadow bg-body py-3 m-5" style="min-height: 500px;">
     <h1 class="text-center">Información personal</h1>
     <div class="col-8 mx-auto mt-5 pb-3">
         <div *ngIf="tengoDatos">
@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         <label class="ms-2">Plataforma</label>
-                        <select class="form-select" name="platform">
+                        <select class="form-select" formControlName="platform">
                             <option value="0" [selected]="seleccionadoPlatform[0]">PS4</option>
                             <option value="1" [selected]="seleccionadoPlatform[1]">XBOX</option>
                             <option value="2" [selected]="seleccionadoPlatform[2]">ORIGIN</option>
@@ -26,31 +26,30 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         <label class="ms-2">Twitter</label>
-                        <input type="text" class="form-control" name="mail" value="{{userData.twitter}}">
+                        <input type="text" class="form-control" formControlName="twitter">
                     </div>
                     <div class="col-12 col-lg-6 mt-3">
                         <label class="ms-2">Posicion</label>
-                        <select class="form-select" name="position">
-                            <option>Seleccione una posicion:</option>
-                            <option value="DC" [selected]="seleccionadoPosicion[0]">Delantero</option>
-                            <option value="MC" [selected]="seleccionadoPosicion[1]">Centro campista</option>
-                            <option value="DF" [selected]="seleccionadoPosicion[2]">Defensa</option>
-                            <option value="POR" [selected]="seleccionadoPosicion[3]">Portero</option>
+                        <select class="form-select" formControlName="position">
+                            <option value="0">Delantero</option>
+                            <option value="1">Centro campista</option>
+                            <option value="2">Defensa</option>
+                            <option value="3">Portero</option>
                           </select>
                     </div>
                     <div class="col-12 col-lg-6 mt-3">
                         <label class="ms-2">Segunda posicion</label>
-                        <select class="form-select" name="secondPosition">
-                            <option selected>Seleccione una posicion:</option>
-                            <option value="DC" [selected]="seleccionadoPosicion2[0]">Delantero</option>
-                            <option value="MC" [selected]="seleccionadoPosicion2[1]">Centro campista</option>
-                            <option value="DF" [selected]="seleccionadoPosicion2[2]">Defensa</option>
-                            <option value="POR" [selected]="seleccionadoPosicion2[3]">Portero</option>
+                        <select class="form-select" formControlName="secondPosition">
+                            <option value="0">Delantero</option>
+                            <option value="1">Centro campista</option>
+                            <option value="2">Defensa</option>
+                            <option value="3">Portero</option>
                           </select>
                     </div>
                 </div>
             </form>
-            <div class="d-flex justify-content-end mt-5">
+            <div class="d-flex justify-content-between mt-5">
+                <button type="button" class="btn btn-outline-success" (click)="guardar()">Guardar</button>
                 <button type="button" class="btn btn-outline-danger" (click)="cerrarSesion()">Cerrar sesión</button>
             </div>
         </div>

@@ -1,21 +1,62 @@
-<div class="col-9 mx-auto rounded-5 shadow bg-body py-3 m-5">
+<div class="col-12 col-md-9 mx-auto rounded-5 shadow bg-body py-3 m-5">
     <h1 class="text-center">Haz que te busquen</h1>
-    <div class="col-8 mx-auto mt-5 pb-3">
+    <div class="col-11 col-md-8 mx-auto mt-5 pb-3">
         <form [formGroup]="formPostulacion">
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Describe al jugador que buscas" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
-                <label for="floatingTextarea2">Describe al jugador que buscas</label>
+                <textarea class="form-control" placeholder="Describe al jugador que buscas" id="floatingTextarea2" formControlName="description" name="description" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Describe al jugador que buscas <span class="text-danger">*</span></label>
             </div>
-            <select class="form-select mt-4" name="position">
-                <option selected>Seleccione una posicion:</option>
-                <option value="DC">Delantero</option>
-                <option value="MC">Centro campista</option>
-                <option value="DF">Defensa</option>
-                <option value="POR">Portero</option>
+            <label for="" class="mt-4">Seleccione una posición:</label>
+            <select class="form-select" name="position" formControlName="position">
+                <option value="0">Delantero</option>
+                <option value="1">Centro campista</option>
+                <option value="2">Defensa</option>
+                <option value="3">Portero</option>
               </select>
-            <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-success mt-4" [disabled]="!formPostulacion.valid">Crear</button>
+              <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success mt-4" *ngIf="!cargando" (click)="guardar()" [disabled]="!formPostulacion.valid">Crear</button>
+                <button type="submit" class="btn btn-success mt-4" *ngIf="cargando" disabled>
+                    <div class="spinner-border text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                </button>
             </div>
         </form>
     </div>
+</div>
+
+
+<div class="col-11 col-md-9 mx-auto py-3 m-5" style="min-height: 300px;">
+    <h1>Postulaciones:</h1>
+    <div id="datos" *ngIf="tengoDatos">
+        <div class="col-11 col-md-8 mx-auto mt-5 pb-3">
+            <div *ngFor="let postulacion of paginate(postulaciones,5,postulacionesPag)">
+                <div class="d-flex justify-content-between">
+                    <h3>@{{postulacion.username}}</h3>
+                    <span>{{postulacion.date | date:'d/M/y'}}</span>
+                </div>
+                <p *ngIf="postulacion.video">Mejores jugadas: <a href="{{postulacion.video}}">{{postulacion.video}}</a></p>
+                <p>Posición: {{postulacion.position | posicion}}</p>
+                <p *ngIf="postulacion.secondPosition">Segunda posición: {{postulacion.secondPosition | posicion}}</p>
+                <p class="fst-italic">{{postulacion.description}}</p>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-success" (click)="fichar(postulacion.idUser,postulacion.idUserST)">Fichar</button>
+                    <button type="button" class="btn btn-danger" *ngIf="postulacion.username==username" (click)="borrar()" [disabled]="cargandoBorrar">Borrar</button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="col-11 col-md-8 mx-auto mt-5 pb-3 d-flex justify-content-center">
+            <button type="button" (click)="atras()" class="btn btn-dark" [disabled]="postulacionesPag==1"><</button>
+            <span class="mt-2 mx-5">
+                Página {{postulacionesPag}}
+            </span>
+            <button type="button" (click)="siguiente()" class="btn btn-dark" [disabled]="postulaciones.length/5<postulacionesPag">></button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-5 pt-5" *ngIf="!tengoDatos">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
 </div>

@@ -1,0 +1,32 @@
+<div class="col-11 col-md-9 mx-auto bg-body py-3 m-5" style="min-height: 650px;">
+    <h1>Notificaciones:</h1>
+    <div *ngIf="hayDatos">
+        <div class="col-11 col-md-9 mx-auto rounded-5 shadow bg-body p-5 m-5" *ngFor="let notificacion of notificaciones" >
+            <h3>Enviado por: {{notificacion.username}}</h3>
+            <div *ngIf="notificacion.type=='team'">
+                <h4>Equipo: {{notificacion.teamName}}</h4>
+                <p>Han visto que buscas equipo en el apartado de "Buscar jugador" y quieren que te unas a ellos. Recuerda que si aceptas las demas peticiones, serán borradas.</p>
+
+                <p *ngIf="notificacion.type=='team'">¿Quieres unirte a su equipo?</p>
+            </div>
+            <div *ngIf="notificacion.type=='user'">
+                <h4>Más informacion: <a href="https://twitter.com/{{notificacion.twitter}}">twitter del jugador</a></h4>
+                <p>Ha visto que buscas jugadores como él, y piensa que sería un buen jugador para esta vacante.</p>
+                <p>¿Quieres ficharlo?</p>
+            </div>
+            <div class="d-flex justify-content-around">
+                <button class="btn" (click)="aceptar(notificacion.idNotification)">
+                    <i class="fa-solid fa-check text-success fs-1"></i>
+                </button>
+                <button class="btn" (click)="denegar(notificacion.idNotification)">
+                    <i class="fa-solid fa-xmark text-danger fs-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="!hayDatos">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+</div>

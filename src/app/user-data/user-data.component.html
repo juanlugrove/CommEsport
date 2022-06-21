@@ -1,7 +1,11 @@
 <div class="d-flex align-items-center gap-2">
+    <a routerLink="/notificaciones">
+        <img src="../../assets/media/icons/campana.png" alt="" class="me-3" style="max-height: 30px" *ngIf="notificaciones?.length==0">
+        <img src="../../assets/media/icons/campanaNoti.png" alt="" class="me-3" style="max-height: 30px" *ngIf="notificaciones?.length!=0">
+    </a>
     <div class="text-white d-flex flex-column text-end fs-6">
         <span class="fw-bold">@{{ loguedUsername}}</span>
         <a routerLink="/perfil" class="link-light">Editar perfil/equipo</a>
     </div>
-    <img src="../../assets/media/icons/userDefault.png" alt="" style="height: 40px;">
+    <img src="../../assets/media/icons/{{userData.logo}}.png" alt="" style="height: 40px;">
 </div>

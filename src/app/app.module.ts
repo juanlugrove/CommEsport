@@ -17,6 +17,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GuiaComponent } from './guia/guia.component';
 import { CookieService } from 'ngx-cookie-service';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PosicionPipe } from './posicion.pipe';
+import { NotificationsComponent } from './notifications/notifications.component';
+
 
 @NgModule({
   declarations: [
@@ -31,13 +35,16 @@ import { CookieService } from 'ngx-cookie-service';
     PerfilComponent,
     PagenotfoundComponent,
     FooterComponent,
-    GuiaComponent
+    GuiaComponent,
+    PosicionPipe,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

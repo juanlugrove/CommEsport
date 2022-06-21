@@ -10,6 +10,8 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
+import { ValidacionesPropias } from '../validaciones-propias';
+
 
 @Component({
   selector: 'app-registrologin',
@@ -21,6 +23,9 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
   formRegister: FormGroup;
   loading: boolean=false;
   url: string;
+  usuarioUsado:boolean=false;
+  correoUsado:boolean=false;
+  mostrarErrores:boolean=false;
   // subRef$: Subscription;
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private AuthService: AuthService, private router: Router) {
     this.url = environment.urlBase;
@@ -30,9 +35,9 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
     });
     this.formRegister=formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
-      mail: ['', Validators.required],
-      platform: ['', Validators.required]
+      password: ['', [Validators.required ,Validators.minLength(6)]],
+      mail: ['', [Validators.required,Validators.email]],
+      platform: ['5', [Validators.required, ValidacionesPropias.plataformaSeleccionada]]
     });
    }
 
@@ -65,7 +70,8 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
         title: 'Vaya',
         text: 'Usuario o contraseña incorrectas',
         icon: 'error',
-        confirmButtonText: 'Cool'
+        confirmButtonText: 'Cerrar',
+        confirmButtonColor: '#d9534f'
       })
     });
 
@@ -78,5 +84,54 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
     // if(this.subRef$){
     //   this.subRef$.unsubscribe();
     // }
+  }
+
+  register():void {
+    if(this.formRegister.valid && !this.correoUsado && !this.usuarioUsado){
+      this.loading=true;
+      this.http.get(this.url+"auth/username/"+this.formRegister.value.username).subscribe( r => {
+        if(r==false){
+          this.usuarioUsado=false;
+          this.http.get(this.url+"auth/mail/"+this.formRegister.value.mail).subscribe( r => {
+            if(r==false){
+              this.correoUsado=false;
+              
+              this.http.post(this.url+"auth/register",this.formRegister.value).pipe(catchError(this.errorHandler)).subscribe( r => {
+                // console.log(r);
+                this.loading=false;
+                Swal.fire({
+                  position: 'top',
+                  icon: 'success',
+                  title: 'Usuario registrado',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                  window.location.reload();
+              }, error => {
+                console.log(error);
+                this.loading=false;
+                Swal.fire({
+                  title: 'Vaya',
+                  text: 'Intentelo de nuevo por favor',
+                  icon: 'error',
+                  confirmButtonText: 'Cerrar',
+                  confirmButtonColor: '#d9534f'
+                })
+              });
+
+            } else {
+              this.correoUsado=true;
+              this.loading=false;
+
+            }
+          });
+        } else {
+          this.loading=false;
+          this.usuarioUsado=true;
+        }
+      });
+    }else {
+      this.mostrarErrores=true;
+    }
   }
 }

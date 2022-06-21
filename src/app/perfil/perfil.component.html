@@ -26,7 +26,10 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         <label class="ms-2">Twitter</label>
-                        <input type="text" class="form-control" formControlName="twitter">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+                            <input type="text" class="form-control" formControlName="twitter">
+                        </div>
                     </div>
                     <div class="col-12 col-lg-6 mt-3">
                         <label class="ms-2">Posicion</label>
@@ -54,6 +57,81 @@
             </div>
         </div>
         <div class="d-flex justify-content-center" *ngIf="!tengoDatos">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+    </div>
+</div>
+<div class="col-11 col-md-9 mx-auto rounded-5 shadow bg-body py-3 m-5" style="min-height: 300px;">
+    <h1 class="text-center">Equipo</h1>
+    <div class="col-8 mx-auto mt-5 pb-3">
+        <div *ngIf="tengoDatosEquipo">
+            <!-- No tiene equipo -->
+            <div *ngIf="!teamData">
+                <form [formGroup]="formTeamNuevo">
+                    <div class="row justify-content-between">
+                        <div class="col-12">
+                            <label class="ms-2">Nombre <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control mb-3" value="" formControlName="name" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label class="ms-2">Twitter</label>
+                            <input type="text" class="form-control" value="" formControlName="twitter">
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label class="ms-2">Logo</label>
+                            <input type="text" class="form-control" value="" formControlName="teamLogo">
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex justify-content-end mt-5">
+                    <button type="button" class="btn btn-outline-success" (click)="crearEquipo()">Crear equipo</button>
+                </div>
+            </div>
+
+            <!-- Tiene equipo -->
+            <div *ngIf="teamData">
+                <form [formGroup]="formTeam">
+                    <div class="row justify-content-between">
+                        <div class="col-12 col-lg-6 d-flex gap-2">
+                            <img src="../../assets/media/icons/{{teamData.teamLogo}}.png" alt="" style="max-height: 50px;">
+                            <div>
+                                <label class="ms-2">Nombre</label>
+                                <input type="text" class="form-control mb-3" value="" formControlName="name" aria-label="Username" aria-describedby="basic-addon1" *ngIf="esCapitan">
+                                <h3 *ngIf="!esCapitan">{{teamData.name}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label class="ms-2">Twitter</label>
+                            <input type="text" class="form-control" value="" formControlName="twitter" *ngIf="esCapitan">
+                            <h3 *ngIf="!esCapitan">{{teamData.twitter}}</h3>
+                        </div>
+                        <div class="col-12">
+                            <label class="ms-2">Miembros</label>
+                            <div class="d-flex gap-3">
+                                <div *ngFor="let miembro of teamData.miembros" class="rounded-5 shadow p-4 d-flex flex-column justify-content-between align-items-center">
+                                    <p class="text-center text-warning fw-bold" *ngIf="miembro.idUser==teamData.captain">{{miembro.username}}</p>
+                                    <p class="text-center" *ngIf="miembro.idUser!=teamData.captain">{{miembro.username}}</p>
+                                    <div>
+                                        <img src="../../assets/media/icons/{{miembro.logo}}.png" alt="" style="max-height: 50px;">
+                                    </div>
+                                    <button type="button" class="btn-close mt-2" aria-label="Close" (click)="echar(miembro.idUser)" [disabled]="miembro.idUser==userData.idUser" *ngIf="esCapitan"></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex justify-content-between mt-5">
+                    <span *ngIf="!esCapitan"></span>
+
+                    <button type="button" class="btn btn-outline-success" (click)="editarEquipo()" *ngIf="esCapitan">Editar</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="salir()">Salir del equipo</button>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" *ngIf="!tengoDatosEquipo">
             <div class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>

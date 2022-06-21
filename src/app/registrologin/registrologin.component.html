@@ -3,18 +3,47 @@
         <div class="col-9 mx-auto rounded-5 shadow bg-body py-3">
             <h1 class="text-center">Registrate</h1>
             <div class="col-8 mx-auto mt-5 pb-3">
-                <form [formGroup]="formRegister">
-                    <input type="text" name="username" placeholder="Usuario" class="form-control">
-                    <input type="mail" name="mail" placeholder="Correo" class="form-control mt-4">
-                    <input type="password" name="password" placeholder="Contraseña" class="form-control mt-4">
-                    <select class="form-select mt-4" name="platform">
-                        <option selected>Seleccione una plataforma</option>
-                        <option value="1">PS4</option>
-                        <option value="2">XBOX</option>
-                        <option value="3">ORIGIN</option>
+                <form [formGroup]="formRegister" (ngSubmit)="register()">
+                    <input type="text" name="username" placeholder="Usuario" class="form-control" formControlName="username">
+                    <span class="text-danger ms-1" *ngIf="usuarioUsado">
+                        Usuario ya usado
+                      </span>
+                      <span class="text-danger ms-1" *ngIf="this.formRegister.get('username')?.errors?.['required'] && mostrarErrores">
+                        Usuario obligatorio
+                      </span>
+                    <input type="mail" name="mail" placeholder="Correo" class="form-control mt-4" formControlName="mail">
+                    <span class="text-danger ms-1" *ngIf="correoUsado">
+                        Correo ya usado
+                      </span>
+                      <span class="text-danger ms-1" *ngIf="this.formRegister.get('mail')?.errors?.['required'] && mostrarErrores">
+                        Correo obligatorio
+                      </span>
+                      <span class="text-danger ms-1" *ngIf="this.formRegister.get('mail')?.errors?.['email'] && mostrarErrores">
+                        Correo no valido
+                      </span>
+                    <input type="password" name="password" placeholder="Contraseña" class="form-control mt-4" formControlName="password">
+                    <span class="text-danger ms-1" *ngIf="this.formRegister.get('password')?.errors?.['required'] && mostrarErrores">
+                        Contraseña obligatoria
+                      </span>
+                    <span class="text-danger ms-1" *ngIf="this.formRegister.get('password')?.errors?.['minlength'] && mostrarErrores">
+                        La contraseña debe tener minimo 6 caracteres
+                      </span>
+                    <select class="form-select mt-4" name="platform" formControlName="platform">
+                        <option value="5">Seleccione una plataforma</option>
+                        <option value="0">PS4</option>
+                        <option value="1">XBOX</option>
+                        <option value="2">ORIGIN</option>
                       </select>
+                      <span class="text-danger ms-1" *ngIf="this.formRegister.get('platform')?.errors?.['plataformaSeleccionada'] && mostrarErrores">
+                        Plataforma obligatoria
+                      </span>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-success mt-4" [disabled]="!formRegister.valid">Enviar</button>
+                        <button type="submit" class="btn btn-success mt-4">
+                            <span *ngIf="!loading">Crear</span>
+                            <div class="spinner-border text-light" role="status" *ngIf="loading">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                        </button>
                     </div>
                 </form>
             </div>

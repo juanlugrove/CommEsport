@@ -5,6 +5,7 @@ import { BuscarjugadorComponent } from './buscarjugador/buscarjugador.component'
 import { CanActivateGuard } from './can-activate.guard';
 import { GuiaComponent } from './guia/guia.component';
 import { HomeComponent } from './home/home.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrologinComponent } from './registrologin/registrologin.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'unete', component: RegistrologinComponent},
   {path: 'buscarEquipo', component: BuscarequipoComponent, canActivate: [CanActivateGuard]},
   {path: 'buscarJugador', component: BuscarjugadorComponent, canActivate: [CanActivateGuard]},
+  {path: 'notificaciones', component: NotificationsComponent, canActivate: [CanActivateGuard]},
   {path: 'guia', component: GuiaComponent},
   {path: '**', component: PagenotfoundComponent}
 

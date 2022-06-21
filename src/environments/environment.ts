@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBase: "http://localhost/apiComm/apiComm/public/api/"
+  urlBase: "https://apicommesports.herokuapp.com/api/"
 };
 
 /*

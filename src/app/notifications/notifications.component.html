@@ -10,7 +10,7 @@
                 <p *ngIf="notificacion.type=='team'">¿Quieres unirte a su equipo?</p>
             </div>
             <div *ngIf="notificacion.type=='user'">
-                <h4>Más informacion: <a href="https://twitter.com/{{notificacion.twitter}}">twitter del jugador</a></h4>
+                <h4 *ngIf="notificacion.twitter">Más informacion: <a href="https://twitter.com/{{notificacion.twitter}}">twitter del jugador</a></h4>
                 <p>Ha visto que buscas jugadores como él, y piensa que sería un buen jugador para esta vacante.</p>
                 <p>¿Quieres ficharlo?</p>
             </div>

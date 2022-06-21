@@ -37,10 +37,20 @@
                       <span class="text-danger ms-1" *ngIf="this.formRegister.get('platform')?.errors?.['plataformaSeleccionada'] && mostrarErrores">
                         Plataforma obligatoria
                       </span>
+                    <select class="form-select mt-4" name="position" formControlName="position">
+                        <option value="5">Seleccione una posición</option>
+                        <option value="0">{{0|posicion}}</option>
+                        <option value="1">{{1|posicion}}</option>
+                        <option value="2">{{2|posicion}}</option>
+                        <option value="3">{{3|posicion}}</option>
+                      </select>
+                      <span class="text-danger ms-1" *ngIf="this.formRegister.get('position')?.errors?.['plataformaSeleccionada'] && mostrarErrores">
+                        Posicion obligatoria
+                      </span>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-success mt-4">
-                            <span *ngIf="!loading">Crear</span>
-                            <div class="spinner-border text-light" role="status" *ngIf="loading">
+                        <button type="submit" class="btn btn-success mt-4" [disabled]="loadingRegistro">
+                            <span *ngIf="!loadingRegistro">Crear</span>
+                            <div class="spinner-border text-light" role="status" *ngIf="loadingRegistro">
                                 <span class="visually-hidden">Loading...</span>
                               </div>
                         </button>
@@ -57,9 +67,9 @@
                     <input type="text" name="username" placeholder="Usuario" class="form-control" formControlName="username">
                     <input type="password" name="password" placeholder="Contraseña" class="form-control mt-4" formControlName="password">
                     <div class="d-flex justify-content-end">
-                        <button [disabled]="!formLogin.valid || loading"  type="submit" class="btn btn-success mt-4">
-                            <span *ngIf="!loading">Únete</span>
-                            <div class="spinner-border text-light" role="status" *ngIf="loading">
+                        <button [disabled]="!formLogin.valid || loadingLogin"  type="submit" class="btn btn-success mt-4">
+                            <span *ngIf="!loadingLogin">Únete</span>
+                            <div class="spinner-border text-light" role="status" *ngIf="loadingLogin">
                                 <span class="visually-hidden">Loading...</span>
                               </div>
                         </button>

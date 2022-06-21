@@ -21,7 +21,8 @@ import { ValidacionesPropias } from '../validaciones-propias';
 export class RegistrologinComponent implements OnInit, OnDestroy {
   formLogin: FormGroup;
   formRegister: FormGroup;
-  loading: boolean=false;
+  loadingLogin: boolean=false;
+  loadingRegistro: boolean=false;
   url: string;
   usuarioUsado:boolean=false;
   correoUsado:boolean=false;
@@ -37,7 +38,8 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
       username: ['', Validators.required],
       password: ['', [Validators.required ,Validators.minLength(6)]],
       mail: ['', [Validators.required,Validators.email]],
-      platform: ['5', [Validators.required, ValidacionesPropias.plataformaSeleccionada]]
+      platform: ['5', [Validators.required, ValidacionesPropias.plataformaSeleccionada]],
+      position: ['5', [Validators.required, ValidacionesPropias.plataformaSeleccionada]]
     });
    }
 
@@ -47,10 +49,10 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
 
   Login(){
     let infoLogin:any;
-    this.loading=true
+    this.loadingLogin=true
     this.http.post(this.url+"auth/login",this.formLogin.value).pipe(catchError(this.errorHandler)).subscribe( r => {
       // console.log(r);
-      this.loading=false;
+      this.loadingLogin=false;
       infoLogin=r
       this.AuthService.Login(this.formLogin.value.username,infoLogin.access_token);
       Swal.fire({
@@ -65,7 +67,7 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
       });
     }, error => {
       console.log(error);
-      this.loading=false;
+      this.loadingLogin=false;
       Swal.fire({
         title: 'Vaya',
         text: 'Usuario o contraseña incorrectas',
@@ -88,7 +90,7 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
 
   register():void {
     if(this.formRegister.valid && !this.correoUsado && !this.usuarioUsado){
-      this.loading=true;
+      this.loadingRegistro=true;
       this.http.get(this.url+"auth/username/"+this.formRegister.value.username).subscribe( r => {
         if(r==false){
           this.usuarioUsado=false;
@@ -98,7 +100,7 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
               
               this.http.post(this.url+"auth/register",this.formRegister.value).pipe(catchError(this.errorHandler)).subscribe( r => {
                 // console.log(r);
-                this.loading=false;
+                this.loadingRegistro=false;
                 Swal.fire({
                   position: 'top',
                   icon: 'success',
@@ -109,7 +111,7 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
                   window.location.reload();
               }, error => {
                 console.log(error);
-                this.loading=false;
+                this.loadingRegistro=false;
                 Swal.fire({
                   title: 'Vaya',
                   text: 'Intentelo de nuevo por favor',
@@ -121,12 +123,12 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
 
             } else {
               this.correoUsado=true;
-              this.loading=false;
+              this.loadingRegistro=false;
 
             }
           });
         } else {
-          this.loading=false;
+          this.loadingRegistro=false;
           this.usuarioUsado=true;
         }
       });

@@ -147,7 +147,6 @@ export class PerfilComponent implements OnInit {
     this.tengoDatosEquipo=false;
       this.http.delete(this.url+"teamUsers",this.requestOptions).pipe(catchError(this.errorHandler)).subscribe( r => {
         this.tengoDatosEquipo=true;
-        console.log(r);
         Swal.fire({
           position: 'top',
           icon: 'success',
@@ -198,8 +197,9 @@ export class PerfilComponent implements OnInit {
 
   crearEquipo():void {
     this.tengoDatosEquipo=false;
+    // console.log(this.formTeamNuevo.value);
     this.http.post(this.url+"team",this.formTeamNuevo.value,this.requestOptions).pipe(catchError(this.errorHandler)).subscribe( r => {
-      console.log(this.formTeamNuevo.value);
+      // console.log(r);
       this.tengoDatosEquipo=true;
       this.teamData=r;
       Swal.fire({

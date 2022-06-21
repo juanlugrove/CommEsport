@@ -71,18 +71,21 @@
             <div *ngIf="!teamData">
                 <form [formGroup]="formTeamNuevo">
                     <div class="row justify-content-between">
-                        <div class="col-12">
+                        <div class="col-12 col-lg-6">
                             <label class="ms-2">Nombre <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-3" value="" formControlName="name" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <div class="col-12 col-lg-6">
                             <label class="ms-2">Twitter</label>
-                            <input type="text" class="form-control" value="" formControlName="twitter">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                                <input type="text" class="form-control" formControlName="twitter">
+                            </div>
                         </div>
-                        <div class="col-12 col-lg-6">
+                        <!-- <div class="col-12 col-lg-6">
                             <label class="ms-2">Logo</label>
                             <input type="text" class="form-control" value="" formControlName="teamLogo">
-                        </div>
+                        </div> -->
                     </div>
                 </form>
                 <div class="d-flex justify-content-end mt-5">
@@ -104,8 +107,13 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <label class="ms-2">Twitter</label>
-                            <input type="text" class="form-control" value="" formControlName="twitter" *ngIf="esCapitan">
-                            <h3 *ngIf="!esCapitan">{{teamData.twitter}}</h3>
+                            <div class="input-group mb-3" *ngIf="esCapitan">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                                <input type="text" class="form-control" formControlName="twitter">
+                            </div>
+                            <a  *ngIf="!esCapitan" href="https://twitter.com/{{teamData.twitter}}">
+                                <h3>{{teamData.twitter}}</h3>
+                            </a>
                         </div>
                         <div class="col-12">
                             <label class="ms-2">Miembros</label>

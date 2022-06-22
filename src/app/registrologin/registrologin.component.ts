@@ -89,7 +89,7 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
   }
 
   register():void {
-    if(this.formRegister.valid && !this.correoUsado && !this.usuarioUsado){
+    if(this.formRegister.valid){
       this.loadingRegistro=true;
       this.http.get(this.url+"auth/username/"+this.formRegister.value.username).subscribe( r => {
         if(r==false){
@@ -97,7 +97,7 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
           this.http.get(this.url+"auth/mail/"+this.formRegister.value.mail).subscribe( r => {
             if(r==false){
               this.correoUsado=false;
-              
+              // console.log(this.formRegister.value);
               this.http.post(this.url+"auth/register",this.formRegister.value).pipe(catchError(this.errorHandler)).subscribe( r => {
                 // console.log(r);
                 this.loadingRegistro=false;
@@ -108,7 +108,7 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
                   showConfirmButton: false,
                   timer: 1500
                 })
-                  window.location.reload();
+                  // window.location.reload();
               }, error => {
                 console.log(error);
                 this.loadingRegistro=false;

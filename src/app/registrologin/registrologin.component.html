@@ -1,6 +1,6 @@
-<div class="row my-5 py-5 w-100">
-    <div class="col mt-5 p-5">
-        <div class="col-9 mx-auto rounded-5 shadow bg-body py-3">
+<div class="row my-5 py-0 py-md-5 w-100">
+    <div class="col-12 col-md-6 mt-0 mt-md-2 p-5">
+        <div class="col-12 col-md-11 mx-auto rounded-5 shadow bg-body py-3">
             <h1 class="text-center">Registrate</h1>
             <div class="col-8 mx-auto mt-5 pb-3">
                 <form [formGroup]="formRegister" (ngSubmit)="register()">
@@ -28,7 +28,7 @@
                     <span class="text-danger ms-1" *ngIf="this.formRegister.get('password')?.errors?.['minlength'] && mostrarErrores">
                         La contraseña debe tener minimo 6 caracteres
                       </span>
-                    <select class="form-select mt-4" name="platform" formControlName="platform">
+                    <!-- <select class="form-select mt-4" name="platform" formControlName="platform">
                         <option value="5">Seleccione una plataforma</option>
                         <option value="0">PS4</option>
                         <option value="1">XBOX</option>
@@ -36,7 +36,7 @@
                       </select>
                       <span class="text-danger ms-1" *ngIf="this.formRegister.get('platform')?.errors?.['plataformaSeleccionada'] && mostrarErrores">
                         Plataforma obligatoria
-                      </span>
+                      </span> -->
                     <select class="form-select mt-4" name="position" formControlName="position">
                         <option value="5">Seleccione una posición</option>
                         <option value="0">{{0|posicion}}</option>
@@ -59,8 +59,8 @@
             </div>
         </div>
     </div>
-    <div class="col mt-5 border-start border-success p-4 d-flex align-items-center">
-        <div class="col-9 mx-auto rounded-5 shadow bg-body py-3">
+    <div class="col-12 col-md-6 mt-5 border-start border-success p-4 d-flex align-items-center">
+        <div class="col-12 col-md-11 mx-auto rounded-5 shadow bg-body py-3">
             <h1 class="text-center">Inicia sesión</h1>
             <div class="col-8 mx-auto mt-5 pb-3">
                 <form [formGroup]="formLogin" (ngSubmit)="Login()" >

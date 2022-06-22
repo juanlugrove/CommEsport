@@ -34,7 +34,7 @@ export class PerfilComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private authService: AuthService, private router: Router, private cookieService: CookieService) {
     this.url = environment.urlBase;
     this.formUser=formBuilder.group({
-      platform: ['', Validators.required],
+      platform: ['0'],
       twitter: [''],
       position: [''],
       secondPosition: [''],

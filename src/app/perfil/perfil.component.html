@@ -16,14 +16,14 @@
                         <label class="ms-2">Correo</label>
                         <input type="email" disabled class="form-control" name="mail" value="{{userData.mail}}">
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <!-- <div class="col-12 col-lg-6">
                         <label class="ms-2">Plataforma</label>
                         <select class="form-select" formControlName="platform">
                             <option value="0" [selected]="seleccionadoPlatform[0]">PS4</option>
                             <option value="1" [selected]="seleccionadoPlatform[1]">XBOX</option>
                             <option value="2" [selected]="seleccionadoPlatform[2]">ORIGIN</option>
                           </select>
-                    </div>
+                    </div> -->
                     <div class="col-12 col-lg-6">
                         <label class="ms-2">Twitter</label>
                         <div class="input-group mb-3">
@@ -31,7 +31,7 @@
                             <input type="text" class="form-control" formControlName="twitter">
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6 mt-3">
+                    <div class="col-12 col-lg-6">
                         <label class="ms-2">Posicion</label>
                         <select class="form-select" formControlName="position">
                             <option value="0">Delantero</option>
@@ -111,9 +111,12 @@
                                 <span class="input-group-text" id="basic-addon1">@</span>
                                 <input type="text" class="form-control" formControlName="twitter">
                             </div>
-                            <a  *ngIf="!esCapitan" href="https://twitter.com/{{teamData.twitter}}">
+                            <a  *ngIf="!esCapitan && teamData.twitter" href="https://twitter.com/{{teamData.twitter}}">
                                 <h3>{{teamData.twitter}}</h3>
                             </a>
+                            <span  *ngIf="!esCapitan && !teamData.twitter">
+                                <h3>No establecido</h3>
+                            </span>
                         </div>
                         <div class="col-12">
                             <label class="ms-2">Miembros</label>

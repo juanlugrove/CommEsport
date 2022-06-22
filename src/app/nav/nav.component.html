@@ -15,10 +15,13 @@
           <a routerLink="/home" routerLinkActive="active-link" class="nav-link">Inicio</a>
         </li>
         <li class="nav-item d-lg-none">
-          <a routerLink="/perfil" routerLinkActive="active-link" class="nav-link">Perfil/Equipo</a>
+          <a routerLink="/unete" routerLinkActive="active-link" class="nav-link" *ngIf="!IsAuthenticated">ÚNETE</a>
         </li>
         <li class="nav-item d-lg-none">
-          <a routerLink="/notificaciones" routerLinkActive="active-link" class="nav-link">Notificaciones</a>
+          <a routerLink="/perfil" routerLinkActive="active-link" class="nav-link" *ngIf="IsAuthenticated">Perfil/Equipo</a>
+        </li>
+        <li class="nav-item d-lg-none">
+          <a routerLink="/notificaciones" routerLinkActive="active-link" class="nav-link" *ngIf="IsAuthenticated">Notificaciones</a>
         </li>
         <li class="nav-item">
           <a routerLink="/buscarEquipo" routerLinkActive="active-link" class="nav-link">Buscar equipo</a>

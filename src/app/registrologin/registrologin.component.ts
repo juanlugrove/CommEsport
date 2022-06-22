@@ -38,7 +38,7 @@ export class RegistrologinComponent implements OnInit, OnDestroy {
       username: ['', Validators.required],
       password: ['', [Validators.required ,Validators.minLength(6)]],
       mail: ['', [Validators.required,Validators.email]],
-      platform: ['5', [Validators.required, ValidacionesPropias.plataformaSeleccionada]],
+      platform: ['0'],
       position: ['5', [Validators.required, ValidacionesPropias.plataformaSeleccionada]]
     });
    }
